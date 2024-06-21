@@ -3,7 +3,7 @@
 
 Reader::Reader(std::ifstream& in) : stream(in) {
     this->current = (char) STX;
-    this->position = Position {0, 0};
+    this->position = Position {1, 0};
 }
 
 char Reader::get_current() const {

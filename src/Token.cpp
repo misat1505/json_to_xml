@@ -17,7 +17,6 @@ Position Token::get_position() const {
 std::ostream& operator<<(std::ostream& os, const Token& token) {
     os << "Token: ";
     
-    // Print TokenType
     switch (token.token_type) {
         case TokenType::INT:
             os << "INT";
@@ -46,6 +45,15 @@ std::ostream& operator<<(std::ostream& os, const Token& token) {
         case TokenType::BRACKET_CLOSE:
             os << "BRACKET_CLOSE";
             break;
+        case TokenType::TRUE:
+            os << "TRUE";
+            break;
+        case TokenType::FALSE:
+            os << "FALSE";
+            break;
+        case TokenType::NONE:
+            os << "NULL";
+            break;
         case TokenType::END:
             os << "END";
             break;
@@ -54,7 +62,6 @@ std::ostream& operator<<(std::ostream& os, const Token& token) {
             break;
     }
     
-    // Print value if it's not std::monostate
     os << ", Value: ";
     std::visit([&os](auto&& arg) {
         using T = std::decay_t<decltype(arg)>;
@@ -65,7 +72,6 @@ std::ostream& operator<<(std::ostream& os, const Token& token) {
         }
     }, token.get_value());
     
-    // Print position
     os << ", Position: (" << token.position.row << ", " << token.position.column << ")";
     
     return os;

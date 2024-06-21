@@ -19,6 +19,7 @@ class Lexer {
         void skip_whitespaces();
         std::optional<Token> try_build_sign();
         std::optional<Token> try_build_string();
+        std::optional<Token> try_build_keyword();
 };
 
 #endif

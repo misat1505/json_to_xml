@@ -17,6 +17,10 @@ enum TokenType {
     BRACKET_OPEN,
     BRACKET_CLOSE,
 
+    TRUE,
+    FALSE,
+    NONE,
+
     END
 };
 

@@ -1,6 +1,6 @@
 #include "../headers/errors/LexicalError.h"
 #include "../headers/Lexer.h"
-#include <iostream>
+#include <map>
 
 Lexer::Lexer(std::ifstream& in) : reader(in) {
     this->current = std::nullopt;
@@ -18,7 +18,8 @@ Token Lexer::generate_token() {
 
     if (
         (token = this->try_build_sign()) ||
-        (token = this->try_build_string())
+        (token = this->try_build_string()) ||
+        (token = this->try_build_keyword())
     ) return token.value();
 
     return Token(TokenType::END, std::monostate{}, this->reader.get_position());
@@ -77,4 +78,30 @@ std::optional<Token> Lexer::try_build_string() {
 
     this->reader.get_next();
     return Token(TokenType::STRING, buffer, position);
+}
+
+std::optional<Token> Lexer::try_build_keyword() {
+    char current = this->reader.get_current();
+    Position position = this->reader.get_position();
+    if (!isalpha(current))
+        return std::nullopt;
+
+    std::string buffer;
+    while(isalpha(current)) {
+        buffer.push_back(current);
+        current = this->reader.get_next();
+    }
+
+    std::map<std::string, TokenType> map = {
+        {"true", TokenType::TRUE},
+        {"false", TokenType::FALSE},
+        {"null", TokenType::NONE},
+    };
+
+    if (map.find(buffer) == map.end()) {
+        throw LexicalError("Invalid keyword: '" + buffer + "'\nAt line " + std::to_string(position.row) + " column " + std::to_string(position.column));
+    }
+
+    TokenType t_type = map[buffer];
+    return Token(t_type, std::monostate{}, position);
 }
