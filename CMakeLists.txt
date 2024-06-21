@@ -12,6 +12,7 @@ set(SOURCES
     src/Lexer.cpp
     src/Token.cpp
     src/Reader.cpp
+    src/Position.cpp
     src/main.cpp
 )
 

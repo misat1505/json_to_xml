@@ -72,7 +72,7 @@ std::ostream& operator<<(std::ostream& os, const Token& token) {
         }
     }, token.get_value());
     
-    os << ", Position: (" << token.position.row << ", " << token.position.column << ")";
+    os << ", Position: " << token.position.to_string();
     
     return os;
 }

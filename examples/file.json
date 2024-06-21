@@ -1,1 +1,39 @@
-["a","b", true]
+{
+    "firstName": "John",
+    "lastName": "Doe",
+    "age": 30,
+    "address": {
+      "streetAddress": "123 Main St",
+      "city": "New York",
+      "state": "NY",
+      "postalCode": "10001"
+    },
+    "phoneNumbers": [
+      {
+        "type": "home",
+        "number": "212-555-1234"
+      },
+      {
+        "type": "work",
+        "number": "646-555-5678"
+      }
+    ],
+    "children": [
+      {
+        "firstName": "Jane",
+        "age": 5
+      },
+      {
+        "firstName": "Mark",
+        "age": 8
+      }
+    ],
+    "spouse": {
+      "firstName": "Jane",
+      "lastName": "Doe",
+      "age": 32
+    },
+    "isActive": true,
+    "hobbies": ["reading", "hiking", "gardening"]
+  }
+  

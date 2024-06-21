@@ -1,5 +1,6 @@
 #include "../headers/errors/LexicalError.h"
 #include "../headers/Lexer.h"
+#include "../headers/Position.h"
 #include <map>
 
 Lexer::Lexer(std::ifstream& in) : reader(in) {
@@ -13,13 +14,13 @@ std::optional<Token> Lexer::get_current() const {
 
 Token Lexer::generate_token() {
     this->skip_whitespaces();
-    // std::cout << "start: " << this->reader.get_current() << "\n";
     std::optional<Token> token;
 
     if (
         (token = this->try_build_sign()) ||
         (token = this->try_build_string()) ||
-        (token = this->try_build_keyword())
+        (token = this->try_build_keyword()) ||
+        (token = this->try_build_number())
     ) return token.value();
 
     return Token(TokenType::END, std::monostate{}, this->reader.get_position());
@@ -69,7 +70,7 @@ std::optional<Token> Lexer::try_build_string() {
     while (this->reader.get_current() != '\"') {
         if (this->reader.get_current() == ETX) {
             position = this->reader.get_position();
-            std::string message = "String not closed.\nAt line " + std::to_string(position.row) + " column: " + std::to_string(position.column);
+            std::string message = "String not closed.\nAt " + position.to_string();
             throw LexicalError(message);
         }
         buffer.push_back(this->reader.get_current());
@@ -99,9 +100,44 @@ std::optional<Token> Lexer::try_build_keyword() {
     };
 
     if (map.find(buffer) == map.end()) {
-        throw LexicalError("Invalid keyword: '" + buffer + "'\nAt line " + std::to_string(position.row) + " column " + std::to_string(position.column));
+        throw LexicalError("Invalid keyword: '" + buffer + "'.\nAt " + position.to_string());
     }
 
     TokenType t_type = map[buffer];
     return Token(t_type, std::monostate{}, position);
+}
+
+std::optional<Token> Lexer::try_build_number() {
+    char current = this->reader.get_current();
+    Position position = this->reader.get_position();
+
+    if (!isdigit(current) && current != '-') {
+        return std::nullopt;
+    }
+
+    std::string buffer;
+    if (current == '-') {
+        buffer.push_back(current);
+        current = this->reader.get_next();
+        if (!isdigit(current)) {
+            throw LexicalError("Cannot create number.\nAt " + position.to_string());
+        }
+    }
+
+    while (isdigit(current)) {
+        buffer.push_back(current);
+        current = this->reader.get_next();
+    }
+
+    if (current != '.')
+        return Token(TokenType::INT, buffer, position);
+    
+    buffer.push_back(current);
+    current = this->reader.get_next();
+    while (isdigit(current)) {
+        buffer.push_back(current);
+        current = this->reader.get_next();
+    }
+
+    return Token(TokenType::FLOAT, buffer, position);
 }

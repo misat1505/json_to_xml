@@ -20,6 +20,7 @@ class Lexer {
         std::optional<Token> try_build_sign();
         std::optional<Token> try_build_string();
         std::optional<Token> try_build_keyword();
+        std::optional<Token> try_build_number();
 };
 
 #endif

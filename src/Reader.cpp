@@ -1,9 +1,7 @@
 #include "../headers/Reader.h"
-#include <iostream>
 
-Reader::Reader(std::ifstream& in) : stream(in) {
+Reader::Reader(std::ifstream& in) : stream(in), position(Position(1, 0)) {
     this->current = (char) STX;
-    this->position = Position {1, 0};
 }
 
 char Reader::get_current() const {
@@ -20,10 +18,10 @@ char Reader::get_next() {
             return this->current;
         }
         if (this->current == '\n') {
-            this->position.row++;
-            this->position.column = 0;
+            this->position.set_line(this->position.get_line() + 1);
+            this->position.set_column(0);
         } else {
-            this->position.column++;
+            this->position.set_column(this->position.get_column() + 1);
         }
     }
     return this->current;
