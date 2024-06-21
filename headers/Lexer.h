@@ -10,7 +10,7 @@ class Lexer {
     public:
         Lexer(std::ifstream& in);
         std::optional<Token> get_current() const;
-        std::optional<Token> generate_token();
+        Token generate_token();
     
     private:
         Reader reader;

@@ -9,15 +9,15 @@ std::optional<Token> Lexer::get_current() const {
     return this->current;
 }
 
-std::optional<Token> Lexer::generate_token() {
+Token Lexer::generate_token() {
     this->skip_whitespaces();
     std::optional<Token> token;
 
     if (
         (token = this->try_build_sign())
-    ) return token;
+    ) return token.value();
 
-    return std::nullopt;
+    return Token(TokenType::END, std::monostate{}, this->reader.get_position());
 }
 
 void Lexer::skip_whitespaces() {

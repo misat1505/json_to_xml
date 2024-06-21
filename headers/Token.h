@@ -14,7 +14,9 @@ enum TokenType {
     BRACE_OPEN,
     BRACE_CLOSE,
     BRACKET_OPEN,
-    BRACKET_CLOSE
+    BRACKET_CLOSE,
+
+    END
 };
 
 class Token {
