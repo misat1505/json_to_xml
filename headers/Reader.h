@@ -2,14 +2,10 @@
 #define READER_H
 
 #include <fstream>
+#include "Position.h"
 
 #define STX 2;
 #define ETX 3;
-
-struct Position {
-    int row;
-    int column;
-};
 
 class Reader {
     public:
