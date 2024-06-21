@@ -4,6 +4,7 @@
 #include <fstream>
 #include <optional>
 #include "Token.h"
+#include "Reader.h"
 
 class Lexer {
     public:
@@ -11,7 +12,7 @@ class Lexer {
         std::optional<Token> generate_token();
     
     private:
-        std::ifstream& stream;
+        Reader reader;
 };
 
 #endif
