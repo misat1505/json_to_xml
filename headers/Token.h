@@ -2,6 +2,7 @@
 #include <string>
 
 #include "Position.h"
+#include <iostream>
 
 enum TokenType {
     INT,
@@ -25,6 +26,8 @@ class Token {
         TokenType get_type() const;
         std::variant<std::monostate, int, float, std::string> get_value() const;
         Position get_position() const;
+
+        friend std::ostream& operator<<(std::ostream& os, const Token& token);
 
     private:
         TokenType token_type;

@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <exception>
 #include "../headers/Converter.h"
 
 int main(int argc, char** argv) {
@@ -10,7 +11,11 @@ int main(int argc, char** argv) {
         return 1;
     }
 
-    Converter converter(file);
+    try {
+        Converter converter(file);
+    } catch (const std::exception& e) {
+        std::cout << e.what() << "\n";
+    }
 
     file.close();
 

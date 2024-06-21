@@ -1,4 +1,5 @@
 #include "../headers/Reader.h"
+#include <iostream>
 
 Reader::Reader(std::ifstream& in) : stream(in) {
     this->current = (char) STX;
@@ -14,6 +15,10 @@ char Reader::get_next() {
         this->current = (char) ETX;
     } else {
         this->stream.get(this->current);
+        if (this->stream.eof()) {
+            this->current = (char) ETX;
+            return this->current;
+        }
         if (this->current == '\n') {
             this->position.row++;
             this->position.column = 0;

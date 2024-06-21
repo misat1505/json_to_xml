@@ -4,8 +4,8 @@
 #include <fstream>
 #include "Position.h"
 
-#define STX 2;
-#define ETX 3;
+#define STX 2
+#define ETX 3
 
 class Reader {
     public:
