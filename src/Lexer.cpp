@@ -21,7 +21,10 @@ Token Lexer::generate_token() {
         (token = this->try_build_string()) ||
         (token = this->try_build_keyword()) ||
         (token = this->try_build_number())
-    ) return token.value();
+    ) {
+        this->current = token.value();
+        return token.value();
+    }
 
     return Token(TokenType::END, std::monostate{}, this->reader.get_position());
 }

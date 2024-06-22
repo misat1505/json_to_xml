@@ -3,6 +3,7 @@
 
 #include <fstream>
 #include "Lexer.h"
+#include "Parser.h"
 
 class Converter {
     public:
@@ -11,6 +12,7 @@ class Converter {
     private:
         std::ifstream& stream;
         Lexer lexer;
+        Parser parser;
 };
 
 #endif

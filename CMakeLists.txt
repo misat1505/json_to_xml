@@ -13,6 +13,8 @@ set(SOURCES
     src/Token.cpp
     src/Reader.cpp
     src/Position.cpp
+    src/Parser.cpp
+    src/ast/Node.cpp
     src/main.cpp
 )
 
