@@ -4,6 +4,7 @@
 #include <optional>
 #include <vector>
 #include <memory>
+#include <map>
 #include "Lexer.h"
 #include "ast/Node.h"
 
@@ -25,6 +26,9 @@ class Parser {
         std::optional<Node> parse_string();
         std::optional<Node> parse_array();
         std::vector<std::unique_ptr<Node>> parse_array_inner();
+
+        std::optional<Node> parse_object();
+        std::map<std::string, std::unique_ptr<Node>> parse_object_inner();
 };
 
 #endif

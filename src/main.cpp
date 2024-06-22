@@ -3,17 +3,22 @@
 #include <exception>
 #include "../headers/Converter.h"
 
-int main(int argc, char** argv) {
+int main(int argc, char **argv)
+{
     std::ifstream file(argv[1]);
 
-    if (!file.is_open()) {
+    if (!file.is_open())
+    {
         std::cerr << "Error: Could not open the file." << std::endl;
         return 1;
     }
 
-    try {
+    try
+    {
         Converter converter(file);
-    } catch (const std::exception& e) {
+    }
+    catch (const std::exception &e)
+    {
         std::cout << e.what() << "\n";
     }
 
