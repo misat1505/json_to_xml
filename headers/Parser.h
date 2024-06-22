@@ -16,7 +16,7 @@ class Parser {
     private:
         Lexer lexer;
 
-        void must_be(TokenType token_type);
+        Token must_be(TokenType token_type);
         std::optional<Node> parse_value();
 
         std::optional<Node> parse_true();

@@ -21,10 +21,9 @@
             },
             {
               "name": "Web Redesign",
-              "description": "Redesign of the corporate website",
-              "status": "completed",
-              "name": 1,
-              "completed_date": "2022-05-12"
+              "description": null,
+              "status": true,
+              "completed_date": false
             }
           ],
           "contact": {

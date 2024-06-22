@@ -1,3 +1,3 @@
 #include "../headers/ast/StringValue.h"
 
-StringValue::StringValue(std::string value): value(value) {}
+StringValue::StringValue(std::string value) : value(value) {}

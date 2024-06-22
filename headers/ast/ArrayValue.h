@@ -6,12 +6,13 @@
 #include <string>
 #include "Node.h"
 
-class ArrayValue: public AstValue {
-    public:
-        ArrayValue(std::vector<std::unique_ptr<Node>>);
-    
-    private:
-        std::vector<std::unique_ptr<Node>> value;
+class ArrayValue : public AstValue
+{
+public:
+    ArrayValue(std::vector<std::unique_ptr<Node>>);
+
+private:
+    std::vector<std::unique_ptr<Node>> value;
 };
 
 #endif

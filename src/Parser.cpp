@@ -25,13 +25,13 @@ Node Parser::parse()
     return std::move(node.value());
 }
 
-void Parser::must_be(TokenType token_type)
+Token Parser::must_be(TokenType token_type)
 {
-    Token token = this->lexer.get_current().value();
+    auto token = this->lexer.get_current().value();
     if (token.get_type() != token_type)
         throw SyntaxError("Expected: " + std::to_string(token_type) + ", got: " + std::to_string(token.get_type()));
 
-    this->lexer.generate_token();
+    return this->lexer.generate_token();
 }
 
 std::optional<Node> Parser::parse_value()
@@ -61,50 +61,50 @@ std::optional<Node> Parser::parse_true()
         return std::nullopt;
     }
 
-    Node node = Node(std::make_unique<TrueValue>(), token.get_position());
-    this->lexer.generate_token();
+    auto node = Node(std::make_unique<TrueValue>(), token.get_position());
+    this->must_be(TokenType::TRUE);
     std::cout << "created true\n";
     return node;
 }
 
 std::optional<Node> Parser::parse_false()
 {
-    Token token = this->lexer.get_current().value();
+    auto token = this->lexer.get_current().value();
     if (token.get_type() != TokenType::FALSE)
     {
         return std::nullopt;
     }
 
-    Node node = Node(std::make_unique<FalseValue>(), token.get_position());
-    this->lexer.generate_token();
+    auto node = Node(std::make_unique<FalseValue>(), token.get_position());
+    this->must_be(TokenType::FALSE);
     std::cout << "created false\n";
     return node;
 }
 
 std::optional<Node> Parser::parse_null()
 {
-    Token token = this->lexer.get_current().value();
+    auto token = this->lexer.get_current().value();
     if (token.get_type() != TokenType::NONE)
     {
         return std::nullopt;
     }
 
-    Node node = Node(std::make_unique<NullValue>(), token.get_position());
-    this->lexer.generate_token();
+    auto node = Node(std::make_unique<NullValue>(), token.get_position());
+    this->must_be(TokenType::NONE);
     std::cout << "created null\n";
     return node;
 }
 
 std::optional<Node> Parser::parse_number()
 {
-    Token token = this->lexer.get_current().value();
+    auto token = this->lexer.get_current().value();
     if (token.get_type() != TokenType::FLOAT && token.get_type() != TokenType::INT)
     {
         return std::nullopt;
     }
 
     auto value_str = std::get<std::string>(token.get_value());
-    Node node = Node(std::make_unique<NumberValue>(value_str), token.get_position());
+    auto node = Node(std::make_unique<NumberValue>(value_str), token.get_position());
     this->lexer.generate_token();
     std::cout << "created number\n";
     return node;
@@ -112,22 +112,22 @@ std::optional<Node> Parser::parse_number()
 
 std::optional<Node> Parser::parse_string()
 {
-    Token token = this->lexer.get_current().value();
+    auto token = this->lexer.get_current().value();
     if (token.get_type() != TokenType::STRING)
     {
         return std::nullopt;
     }
 
-    std::string value_str = std::get<std::string>(token.get_value());
-    Node node = Node(std::make_unique<StringValue>(value_str), token.get_position());
-    this->lexer.generate_token();
+    auto value_str = std::get<std::string>(token.get_value());
+    auto node = Node(std::make_unique<StringValue>(value_str), token.get_position());
+    this->must_be(TokenType::STRING);
     std::cout << "created string\n";
     return node;
 }
 
 std::optional<Node> Parser::parse_array()
 {
-    Token token = this->lexer.get_current().value();
+    auto token = this->lexer.get_current().value();
     if (token.get_type() != TokenType::BRACKET_OPEN)
         return std::nullopt;
 
@@ -135,7 +135,7 @@ std::optional<Node> Parser::parse_array()
     auto nodes = this->parse_array_inner();
     this->must_be(TokenType::BRACKET_CLOSE);
 
-    Node node = Node(std::make_unique<ArrayValue>(std::move(nodes)), token.get_position());
+    auto node = Node(std::make_unique<ArrayValue>(std::move(nodes)), token.get_position());
     std::cout << "created array\n";
     return node;
 }
@@ -150,7 +150,7 @@ std::vector<std::unique_ptr<Node>> Parser::parse_array_inner()
 
     nodes.push_back(std::make_unique<Node>(std::move(node.value())));
 
-    Token token = this->lexer.get_current().value();
+    auto token = this->lexer.get_current().value();
     while (token.get_type() == TokenType::COMMA)
     {
         this->must_be(TokenType::COMMA);
@@ -167,7 +167,7 @@ std::vector<std::unique_ptr<Node>> Parser::parse_array_inner()
 
 std::optional<Node> Parser::parse_object()
 {
-    Token token = this->lexer.get_current().value();
+    auto token = this->lexer.get_current().value();
     if (token.get_type() != BRACE_OPEN)
         return std::nullopt;
 
@@ -175,14 +175,14 @@ std::optional<Node> Parser::parse_object()
     auto map = this->parse_object_inner();
     this->must_be(TokenType::BRACE_CLOSE);
 
-    Node node = Node(std::make_unique<ObjectValue>(std::move(map)), token.get_position());
+    auto node = Node(std::make_unique<ObjectValue>(std::move(map)), token.get_position());
     std::cout << "created object\n";
     return node;
 }
 
 std::map<std::string, std::unique_ptr<Node>> Parser::parse_object_inner()
 {
-    Token token = this->lexer.get_current().value();
+    auto token = this->lexer.get_current().value();
     std::map<std::string, std::unique_ptr<Node>> map;
 
     if (token.get_type() != TokenType::STRING)
@@ -190,11 +190,10 @@ std::map<std::string, std::unique_ptr<Node>> Parser::parse_object_inner()
 
     auto key = std::get<std::string>(token.get_value());
     this->must_be(TokenType::STRING);
-    this->must_be(TokenType::COLON);
-    token = this->lexer.get_current().value();
-    std::optional<Node> value = this->parse_value();
+    token = this->must_be(TokenType::COLON);
+    auto value = this->parse_value();
     if (!value)
-        throw SyntaxError("Bad value in object.\nAt " + token.get_position().to_string());
+        throw SyntaxError("Bad or no value in object.\nAt " + token.get_position().to_string());
     map[key] = std::make_unique<Node>(std::move(value.value()));
     token = this->lexer.get_current().value();
 
@@ -204,11 +203,10 @@ std::map<std::string, std::unique_ptr<Node>> Parser::parse_object_inner()
         token = this->lexer.get_current().value();
         key = std::get<std::string>(token.get_value());
         this->must_be(TokenType::STRING);
-        this->must_be(TokenType::COLON);
-        token = this->lexer.get_current().value();
+        token = this->must_be(TokenType::COLON);
         value = this->parse_value();
         if (!value)
-            throw SyntaxError("Bad value in object.\nAt " + token.get_position().to_string());
+            throw SyntaxError("Bad or no value in object.\nAt " + token.get_position().to_string());
         if (map.find(key) != map.end())
             throw SyntaxError("Key '" + key + "' already exists.\nAt " + token.get_position().to_string());
         map[key] = std::make_unique<Node>(std::move(value.value()));

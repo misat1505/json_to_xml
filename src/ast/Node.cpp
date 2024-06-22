@@ -2,10 +2,12 @@
 
 Node::Node(std::unique_ptr<AstValue> value, Position position) : value(std::move(value)), position(position) {}
 
-std::unique_ptr<AstValue>& Node::get_value() {
+std::unique_ptr<AstValue> &Node::get_value()
+{
     return this->value;
 }
 
-Position Node::get_position() const {
+Position Node::get_position() const
+{
     return this->position;
 }
