@@ -1,3 +1,4 @@
+#include "../headers/errors/SyntaxError.h"
 #include "../headers/Parser.h"
 #include "../headers/ast/AstValue.h"
 #include "../headers/ast/TrueValue.h"
@@ -19,7 +20,7 @@ Node Parser::parse()
     auto node = this->parse_value();
 
     if (!node)
-        throw std::runtime_error("Parsing error: unrecognized token");
+        throw SyntaxError("Parsing error: unrecognized token");
 
     return std::move(node.value());
 }
@@ -28,7 +29,7 @@ void Parser::must_be(TokenType token_type)
 {
     Token token = this->lexer.get_current().value();
     if (token.get_type() != token_type)
-        throw std::runtime_error("Expected: " + std::to_string(token_type) + ", got: " + std::to_string(token.get_type()));
+        throw SyntaxError("Expected: " + std::to_string(token_type) + ", got: " + std::to_string(token.get_type()));
 
     this->lexer.generate_token();
 }
@@ -155,7 +156,7 @@ std::vector<std::unique_ptr<Node>> Parser::parse_array_inner()
         this->must_be(TokenType::COMMA);
         node = this->parse_value();
         if (!node)
-            throw std::runtime_error("Should be a valid value in array");
+            throw SyntaxError("Should be a valid value in array");
 
         nodes.push_back(std::make_unique<Node>(std::move(node.value())));
         token = this->lexer.get_current().value();
@@ -190,11 +191,11 @@ std::map<std::string, std::unique_ptr<Node>> Parser::parse_object_inner()
     auto key = std::get<std::string>(token.get_value());
     this->must_be(TokenType::STRING);
     this->must_be(TokenType::COLON);
+    token = this->lexer.get_current().value();
     std::optional<Node> value = this->parse_value();
     if (!value)
-        throw std::runtime_error("Bad value in object");
-    if (map.find(key) != map.end())
-        throw std::runtime_error("Key already exists");
+        throw SyntaxError("Bad value in object.\nAt " + token.get_position().to_string());
+    map[key] = std::make_unique<Node>(std::move(value.value()));
     token = this->lexer.get_current().value();
 
     while (token.get_type() == TokenType::COMMA)
@@ -204,11 +205,13 @@ std::map<std::string, std::unique_ptr<Node>> Parser::parse_object_inner()
         key = std::get<std::string>(token.get_value());
         this->must_be(TokenType::STRING);
         this->must_be(TokenType::COLON);
-        std::optional<Node> value = this->parse_value();
+        token = this->lexer.get_current().value();
+        value = this->parse_value();
         if (!value)
-            throw std::runtime_error("Bad value in object");
+            throw SyntaxError("Bad value in object.\nAt " + token.get_position().to_string());
         if (map.find(key) != map.end())
-            throw std::runtime_error("Key already exists");
+            throw SyntaxError("Key '" + key + "' already exists.\nAt " + token.get_position().to_string());
+        map[key] = std::make_unique<Node>(std::move(value.value()));
         token = this->lexer.get_current().value();
     }
 

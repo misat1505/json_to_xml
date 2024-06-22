@@ -1,7 +1,6 @@
 {
     "company": {
       "name": "Tech Solutions Inc.",
-      "name": "Bob",
       "founded": 1998,
       "employees": [
         {
@@ -24,6 +23,7 @@
               "name": "Web Redesign",
               "description": "Redesign of the corporate website",
               "status": "completed",
+              "name": 1,
               "completed_date": "2022-05-12"
             }
           ],
