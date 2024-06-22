@@ -17,6 +17,7 @@ set(SOURCES
     src/ast/Node.cpp
     src/ast/NumberValue.cpp
     src/ast/StringValue.cpp
+    src/ast/ArrayValue.cpp
     src/main.cpp
 )
 

@@ -5,7 +5,7 @@
 #include <iostream>
 
 enum TokenType {
-    INT,
+    INT = 0,
     FLOAT,
     STRING,
 

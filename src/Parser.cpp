@@ -5,6 +5,7 @@
 #include "../headers/ast/NullValue.h"
 #include "../headers/ast/NumberValue.h"
 #include "../headers/ast/StringValue.h"
+#include "../headers/ast/ArrayValue.h"
 #include <iostream>
 
 Parser::Parser(Lexer& lexer) : lexer(lexer) {
@@ -12,6 +13,23 @@ Parser::Parser(Lexer& lexer) : lexer(lexer) {
 }
 
 Node Parser::parse() {
+    auto node = this->parse_value();
+
+    if (!node)
+        throw std::runtime_error("Parsing error: unrecognized token");
+    
+    return std::move(node.value());
+}
+
+void Parser::must_be(TokenType token_type) {
+    Token token = this->lexer.get_current().value();
+    if (token.get_type() != token_type)
+        throw std::runtime_error("Expected: " + std::to_string(token_type) + ", got: " + std::to_string(token.get_type()));
+    
+    this->lexer.generate_token();
+}
+
+std::optional<Node> Parser::parse_value() {
     std::optional<Node> node;
 
     if (
@@ -19,12 +37,13 @@ Node Parser::parse() {
         (node = this->parse_false()) ||
         (node = this->parse_null()) ||
         (node = this->parse_number()) ||
-        (node = this->parse_string())
+        (node = this->parse_string()) ||
+        (node = this->parse_array())
     ) {
-        return std::move(node.value());
+        return node;
     }
 
-    throw std::runtime_error("Parsing error: unrecognized token");
+    return std::nullopt;
 }
 
 std::optional<Node> Parser::parse_true() {
@@ -69,7 +88,7 @@ std::optional<Node> Parser::parse_number() {
         return std::nullopt;
     }
 
-    std::string value_str = std::get<std::string>(token.get_value());
+    auto value_str = std::get<std::string>(token.get_value());
     Node node = Node(std::make_unique<NumberValue>(value_str), token.get_position());
     this->lexer.generate_token();
     std::cout << "created number\n";
@@ -87,4 +106,41 @@ std::optional<Node> Parser::parse_string() {
     this->lexer.generate_token();
     std::cout << "created string\n";
     return node;
+}
+
+std::optional<Node> Parser::parse_array() {
+    Token token = this->lexer.get_current().value();
+    if (token.get_type() != TokenType::BRACKET_OPEN)
+        return std::nullopt;
+
+    this->must_be(TokenType::BRACKET_OPEN);
+    auto nodes = this->parse_array_inner();
+    this->must_be(TokenType::BRACKET_CLOSE);
+
+    Node node = Node(std::make_unique<ArrayValue>(std::move(nodes)), token.get_position());
+    std::cout << "created array\n";
+    return node;
+}
+
+std::vector<std::unique_ptr<Node>> Parser::parse_array_inner() {
+    std::vector<std::unique_ptr<Node>> nodes;
+
+    auto node = this->parse_value();
+    if (!node)
+        return nodes;
+    
+    nodes.push_back(std::make_unique<Node>(std::move(node.value())));
+
+    Token token = this->lexer.get_current().value();
+    while (token.get_type() == TokenType::COMMA) {
+        this->must_be(TokenType::COMMA);
+        node = this->parse_value();
+        if (!node)
+            throw std::runtime_error("Should be a valid value in array");
+        
+        nodes.push_back(std::make_unique<Node>(std::move(node.value())));
+        token = this->lexer.get_current().value();
+    }
+
+    return nodes;
 }
