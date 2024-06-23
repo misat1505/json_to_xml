@@ -1,182 +1,181 @@
 {
-    "company": {
-      "name": "Tech Solutions Inc.",
-      "founded": 1998,
-      "employees": [
-        {
-          "id": 1,
-          "name": "Alice Smith",
-          "age": 34,
-          "position": "Software Engineer",
-          "skills": [
-            "C++",
-            "Python",
-            "JavaScript"
-          ],
-          "projects": [
-            {
-              "name": "Project X",
-              "description": "A top-secret AI project",
-              "status": "ongoing"
-            },
-            {
-              "name": "Web Redesign",
-              "description": null,
-              "status": true,
-              "completed_date": false
-            }
-          ],
-          "contact": {
-            "email": "alice.smith@techsolutions.com",
-            "phone": "+1-555-1234"
+  "company": {
+    "name": "Tech Solutions Inc.",
+    "founded": 1998,
+    "employees": [
+      {
+        "id": 1,
+        "name": "Alice Smith",
+        "age": 34,
+        "position": "Software Engineer",
+        "skills": [
+          "C++",
+          "Python",
+          "JavaScript"
+        ],
+        "projects": [
+          {
+            "name": "Project X",
+            "description": "A top-secret AI project",
+            "status": "ongoing"
           },
-          "address": {
-            "street": "123 Main St",
-            "city": "Techville",
-            "state": "CA",
-            "zip": "90210"
+          {
+            "name": "Web Redesign",
+            "description": null,
+            "status": true,
+            "completed_date": false
           }
+        ],
+        "contact": {
+          "email": "alice.smith@techsolutions.com",
+          "phone": "+1-555-1234"
         },
-        {
-          "id": 2,
-          "name": "Bob Johnson",
-          "age": 28,
-          "position": "Data Scientist",
-          "skills": [
-            "Python",
-            "R",
-            "SQL"
-          ],
-          "projects": [
-            {
-              "name": "Data Analysis Tool",
-              "description": "Tool for analyzing large datasets",
-              "status": "ongoing"
-            }
-          ],
-          "contact": {
-            "email": "bob.johnson@techsolutions.com",
-            "phone": "+1-555-5678"
-          },
-          "address": {
-            "street": "456 Elm St",
-            "city": "Techville",
-            "state": "CA",
-            "zip": "90211"
-          }
-        }
-      ],
-      "departments": [
-        {
-          "name": "Engineering",
-          "head": "Dr. Alan Turing",
-          "budget": 2000000,
-          "teams": [
-            {
-              "name": "Development",
-              "lead": "Alice Smith",
-              "members": [
-                "Alice Smith",
-                "Eve Adams"
-              ]
-            },
-            {
-              "name": "Research",
-              "lead": "Bob Johnson",
-              "members": [
-                "Bob Johnson",
-                "Charlie Brown"
-              ]
-            }
-          ]
-        },
-        {
-          "name": "Sales",
-          "head": "Jane Doe",
-          "budget": 1000000,
-          "teams": [
-            {
-              "name": "Domestic Sales",
-              "lead": "Fred Wilson",
-              "members": [
-                "Fred Wilson",
-                "George Harris"
-              ]
-            },
-            {
-              "name": "International Sales",
-              "lead": "Helen Carter",
-              "members": [
-                "Helen Carter",
-                "Ivy Scott"
-              ]
-            }
-          ]
-        }
-      ],
-      "headquarters": {
         "address": {
-          "street": "789 Corporate Blvd",
+          "street": "123 Main St",
           "city": "Techville",
           "state": "CA",
-          "zip": "90212"
-        },
-        "phone": "+1-555-9876"
-      },
-      "products": [
-        {
-          "id": "A100",
-          "name": "TechGadget",
-          "category": "Electronics",
-          "price": 299.99,
-          "release_date": "2021-10-15",
-          "features": [
-            "Bluetooth",
-            "Wi-Fi",
-            "Touchscreen"
-          ],
-          "reviews": [
-            {
-              "user": "JohnDoe123",
-              "rating": 4.5,
-              "comment": "Great product, highly recommend!",
-              "date": "2021-11-01"
-            },
-            {
-              "user": "JaneSmith456",
-              "rating": 4.0,
-              "comment": "Good value for money.",
-              "date": "2021-11-05"
-            }
-          ]
-        },
-        {
-          "id": "B200",
-          "name": "SmartHome",
-          "category": "Home Automation",
-          "price": 499.99,
-          "release_date": "2020-05-22",
-          "features": [
-            "Voice Control",
-            "Energy Monitoring",
-            "Remote Access"
-          ],
-          "reviews": [
-            {
-              "user": "AliceW",
-              "rating": 5.0,
-              "comment": "Makes life so much easier!",
-              "date": "2020-06-01"
-            },
-            {
-              "user": "BobJ",
-              "rating": 3.5,
-              "comment": "Good but could be improved.",
-              "date": "2020-06-10"
-            }
-          ]
+          "zip": "90210"
         }
-      ]
-    }
+      },
+      {
+        "id": 2,
+        "name": "Bob Johnson",
+        "age": 28,
+        "position": "Data Scientist",
+        "skills": [
+          "Python",
+          "R",
+          "SQL"
+        ],
+        "projects": [
+          {
+            "name": "Data Analysis Tool",
+            "description": "Tool for analyzing large datasets",
+            "status": "ongoing"
+          }
+        ],
+        "contact": {
+          "email": "bob.johnson@techsolutions.com",
+          "phone": "+1-555-5678"
+        },
+        "address": {
+          "street": "456 Elm St",
+          "city": "Techville",
+          "state": "CA",
+          "zip": "90211"
+        }
+      }
+    ],
+    "departments": [
+      {
+        "name": "Engineering",
+        "head": "Dr. Alan Turing",
+        "budget": 2000000,
+        "teams": [
+          {
+            "name": "Development",
+            "lead": "Alice Smith",
+            "members": [
+              "Alice Smith",
+              "Eve Adams"
+            ]
+          },
+          {
+            "name": "Research",
+            "lead": "Bob Johnson",
+            "members": [
+              "Bob Johnson",
+              "Charlie Brown"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Sales",
+        "head": "Jane Doe",
+        "budget": 1000000,
+        "teams": [
+          {
+            "name": "Domestic Sales",
+            "lead": "Fred Wilson",
+            "members": [
+              "Fred Wilson",
+              "George Harris"
+            ]
+          },
+          {
+            "name": "International Sales",
+            "lead": "Helen Carter",
+            "members": [
+              "Helen Carter",
+              "Ivy Scott"
+            ]
+          }
+        ]
+      }
+    ],
+    "headquarters": {
+      "address": {
+        "street": "789 Corporate Blvd",
+        "city": "Techville",
+        "state": "CA",
+        "zip": "90212"
+      },
+      "phone": "+1-555-9876"
+    },
+    "products": [
+      {
+        "id": "A100",
+        "name": "TechGadget",
+        "category": "Electronics",
+        "price": 299.99,
+        "release_date": "2021-10-15",
+        "features": [
+          "Bluetooth",
+          "Wi-Fi",
+          "Touchscreen"
+        ],
+        "reviews": [
+          {
+            "user": "JohnDoe123",
+            "rating": 4.5,
+            "comment": "Great product, highly recommend!",
+            "date": "2021-11-01"
+          },
+          {
+            "user": "JaneSmith456",
+            "rating": 4.0,
+            "comment": "Good value for money.",
+            "date": "2021-11-05"
+          }
+        ]
+      },
+      {
+        "id": "B200",
+        "name": "SmartHome",
+        "category": "Home Automation",
+        "price": 499.99,
+        "release_date": "2020-05-22",
+        "features": [
+          "Voice Control",
+          "Energy Monitoring",
+          "Remote Access"
+        ],
+        "reviews": [
+          {
+            "user": "AliceW",
+            "rating": 5.0,
+            "comment": "Makes life so much easier!",
+            "date": "2020-06-01"
+          },
+          {
+            "user": "BobJ",
+            "rating": 3.5,
+            "comment": "Good but could be improved.",
+            "date": "2020-06-10"
+          }
+        ]
+      }
+    ]
   }
-  
+}
