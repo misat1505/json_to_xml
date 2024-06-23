@@ -1,11 +1,14 @@
 #include "../headers/Converter.h"
-#include "../headers/Printer.h"
-#include <iostream>
-#include <memory>
 
-Converter::Converter(std::ifstream &in) : stream(in), lexer(in), parser(lexer)
+namespace JSON_TO_XML
 {
-    auto tree = parser.parse();
-    auto printer = std::make_unique<Printer>(std::cout);
-    tree.accept(*printer);
+    void convert(std::ifstream &in, std::ofstream &out, std::string indent_sequence)
+    {
+        auto lexer = Lexer(in);
+        auto parser = Parser(lexer);
+        auto tree = parser.parse();
+
+        Printer printer(out, indent_sequence);
+        tree.accept(printer);
+    }
 }

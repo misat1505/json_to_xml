@@ -1,6 +1,6 @@
 #include "../headers/Printer.h"
 
-Printer::Printer(std::ostream &out) : out(out) {}
+Printer::Printer(std::ostream &out, std::string indent_sequence) : out(out), indent_sequence(indent_sequence) {}
 
 void Printer::visit(FalseValue &node)
 {
@@ -68,7 +68,7 @@ std::string Printer::get_indent() const
 
     for (int i = 0; i < this->indent; ++i)
     {
-        result += " ";
+        result += indent_sequence;
     }
 
     return result;

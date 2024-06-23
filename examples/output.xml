@@ -1,0 +1,373 @@
+<company>
+  <departments>
+    <0>
+      <budget>
+        2000000
+      </budget>
+      <head>
+        Dr. Alan Turing
+      </head>
+      <name>
+        Engineering
+      </name>
+      <teams>
+        <0>
+          <lead>
+            Alice Smith
+          </lead>
+          <members>
+            <0>
+              Alice Smith
+            </0>
+            <1>
+              Eve Adams
+            </1>
+          </members>
+          <name>
+            Development
+          </name>
+        </0>
+        <1>
+          <lead>
+            Bob Johnson
+          </lead>
+          <members>
+            <0>
+              Bob Johnson
+            </0>
+            <1>
+              Charlie Brown
+            </1>
+          </members>
+          <name>
+            Research
+          </name>
+        </1>
+      </teams>
+    </0>
+    <1>
+      <budget>
+        1000000
+      </budget>
+      <head>
+        Jane Doe
+      </head>
+      <name>
+        Sales
+      </name>
+      <teams>
+        <0>
+          <lead>
+            Fred Wilson
+          </lead>
+          <members>
+            <0>
+              Fred Wilson
+            </0>
+            <1>
+              George Harris
+            </1>
+          </members>
+          <name>
+            Domestic Sales
+          </name>
+        </0>
+        <1>
+          <lead>
+            Helen Carter
+          </lead>
+          <members>
+            <0>
+              Helen Carter
+            </0>
+            <1>
+              Ivy Scott
+            </1>
+          </members>
+          <name>
+            International Sales
+          </name>
+        </1>
+      </teams>
+    </1>
+  </departments>
+  <employees>
+    <0>
+      <address>
+        <city>
+          Techville
+        </city>
+        <state>
+          CA
+        </state>
+        <street>
+          123 Main St
+        </street>
+        <zip>
+          90210
+        </zip>
+      </address>
+      <age>
+        34
+      </age>
+      <contact>
+        <email>
+          alice.smith@techsolutions.com
+        </email>
+        <phone>
+          +1-555-1234
+        </phone>
+      </contact>
+      <id>
+        1
+      </id>
+      <name>
+        Alice Smith
+      </name>
+      <position>
+        Software Engineer
+      </position>
+      <projects>
+        <0>
+          <description>
+            A top-secret AI project
+          </description>
+          <name>
+            Project X
+          </name>
+          <status>
+            ongoing
+          </status>
+        </0>
+        <1>
+          <completed_date>
+            false
+          </completed_date>
+          <description>
+            null
+          </description>
+          <name>
+            Web Redesign
+          </name>
+          <status>
+            true
+          </status>
+        </1>
+      </projects>
+      <skills>
+        <0>
+          C++
+        </0>
+        <1>
+          Python
+        </1>
+        <2>
+          JavaScript
+        </2>
+      </skills>
+    </0>
+    <1>
+      <address>
+        <city>
+          Techville
+        </city>
+        <state>
+          CA
+        </state>
+        <street>
+          456 Elm St
+        </street>
+        <zip>
+          90211
+        </zip>
+      </address>
+      <age>
+        28
+      </age>
+      <contact>
+        <email>
+          bob.johnson@techsolutions.com
+        </email>
+        <phone>
+          +1-555-5678
+        </phone>
+      </contact>
+      <id>
+        2
+      </id>
+      <name>
+        Bob Johnson
+      </name>
+      <position>
+        Data Scientist
+      </position>
+      <projects>
+        <0>
+          <description>
+            Tool for analyzing large datasets
+          </description>
+          <name>
+            Data Analysis Tool
+          </name>
+          <status>
+            ongoing
+          </status>
+        </0>
+      </projects>
+      <skills>
+        <0>
+          Python
+        </0>
+        <1>
+          R
+        </1>
+        <2>
+          SQL
+        </2>
+      </skills>
+    </1>
+  </employees>
+  <founded>
+    1998
+  </founded>
+  <headquarters>
+    <address>
+      <city>
+        Techville
+      </city>
+      <state>
+        CA
+      </state>
+      <street>
+        789 Corporate Blvd
+      </street>
+      <zip>
+        90212
+      </zip>
+    </address>
+    <phone>
+      +1-555-9876
+    </phone>
+  </headquarters>
+  <name>
+    Tech Solutions Inc.
+  </name>
+  <products>
+    <0>
+      <category>
+        Electronics
+      </category>
+      <features>
+        <0>
+          Bluetooth
+        </0>
+        <1>
+          Wi-Fi
+        </1>
+        <2>
+          Touchscreen
+        </2>
+      </features>
+      <id>
+        A100
+      </id>
+      <name>
+        TechGadget
+      </name>
+      <price>
+        299.99
+      </price>
+      <release_date>
+        2021-10-15
+      </release_date>
+      <reviews>
+        <0>
+          <comment>
+            Great product, highly recommend!
+          </comment>
+          <date>
+            2021-11-01
+          </date>
+          <rating>
+            4.5
+          </rating>
+          <user>
+            JohnDoe123
+          </user>
+        </0>
+        <1>
+          <comment>
+            Good value for money.
+          </comment>
+          <date>
+            2021-11-05
+          </date>
+          <rating>
+            4.0
+          </rating>
+          <user>
+            JaneSmith456
+          </user>
+        </1>
+      </reviews>
+    </0>
+    <1>
+      <category>
+        Home Automation
+      </category>
+      <features>
+        <0>
+          Voice Control
+        </0>
+        <1>
+          Energy Monitoring
+        </1>
+        <2>
+          Remote Access
+        </2>
+      </features>
+      <id>
+        B200
+      </id>
+      <name>
+        SmartHome
+      </name>
+      <price>
+        499.99
+      </price>
+      <release_date>
+        2020-05-22
+      </release_date>
+      <reviews>
+        <0>
+          <comment>
+            Makes life so much easier!
+          </comment>
+          <date>
+            2020-06-01
+          </date>
+          <rating>
+            5.0
+          </rating>
+          <user>
+            AliceW
+          </user>
+        </0>
+        <1>
+          <comment>
+            Good but could be improved.
+          </comment>
+          <date>
+            2020-06-10
+          </date>
+          <rating>
+            3.5
+          </rating>
+          <user>
+            BobJ
+          </user>
+        </1>
+      </reviews>
+    </1>
+  </products>
+</company>

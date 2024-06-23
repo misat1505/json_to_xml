@@ -17,7 +17,7 @@
 class Printer : public Visitor
 {
 public:
-    Printer(std::ostream &out);
+    Printer(std::ostream &out, std::string indent_sequence = "\t");
 
     void visit(FalseValue &node) override;
     void visit(NullValue &node) override;
@@ -32,6 +32,7 @@ private:
     int indent = 0;
     std::ostream &out;
 
+    std::string indent_sequence;
     std::string get_indent() const;
 };
 
