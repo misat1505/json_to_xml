@@ -2,6 +2,16 @@
 
 Node::Node(std::unique_ptr<AstValue> value, Position position) : value(std::move(value)), position(position) {}
 
+void Node::accept(Visitor &visitor)
+{
+    visitor.visit(*this);
+
+    if (value)
+    {
+        value->accept(visitor);
+    }
+}
+
 std::unique_ptr<AstValue> &Node::get_value()
 {
     return this->value;

@@ -3,13 +3,16 @@
 
 #include <string>
 #include "AstValue.h"
+#include "Node.h"
 
-class StringValue: public AstValue {
-    public:
-        StringValue(std::string value);
-    
-    private:
-        std::string value;
+class StringValue : public AstValue
+{
+public:
+    StringValue(std::string value);
+    void accept(Visitor &visitor) override;
+
+private:
+    std::string value;
 };
 
 #endif

@@ -4,16 +4,19 @@
 #include <memory>
 #include "AstValue.h"
 #include "../Position.h"
+#include "../Visitor.h"
 
-class Node {
-    public:
-        Node(std::unique_ptr<AstValue> value, Position position);
-        std::unique_ptr<AstValue>& get_value();
-        Position get_position() const;
-    
-    private:
-        std::unique_ptr<AstValue> value;
-        Position position;
+class Node
+{
+public:
+    Node(std::unique_ptr<AstValue> value, Position position);
+    std::unique_ptr<AstValue> &get_value();
+    Position get_position() const;
+    void accept(Visitor &visitor);
+
+private:
+    std::unique_ptr<AstValue> value;
+    Position position;
 };
 
 #endif
