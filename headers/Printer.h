@@ -2,7 +2,17 @@
 #define PRINTER_H
 
 #include <iostream>
+// #include "Visitor.h"
+// #include "ArrayValue.h"
 #include "Visitor.h"
+#include "Node.h"
+#include "ArrayValue.h"
+#include "NullValue.h"
+#include "TrueValue.h"
+#include "FalseValue.h"
+#include "NumberValue.h"
+#include "StringValue.h"
+#include "ObjectValue.h"
 
 class Printer : public Visitor
 {
@@ -34,17 +44,47 @@ public:
 
     void visit(ArrayValue &node) override
     {
-        std::cout << "array\n";
+        std::cout << "[";
+
+        bool first = true;
+        for (auto &child : node.get_value())
+        {
+            if (!first)
+            {
+                std::cout << ", ";
+            }
+            first = false;
+            child->accept(*this);
+        }
+
+        std::cout << "]";
     }
 
     void visit(ObjectValue &node) override
     {
-        std::cout << "object\n";
+        std::cout << "{";
+
+        bool first = true;
+        for (const auto &pair : node.get_value())
+        {
+            if (!first)
+            {
+                std::cout << ", ";
+            }
+            first = false;
+            std::cout << "\"" << pair.first << "\": ";
+            pair.second->accept(*this);
+        }
+
+        std::cout << "}";
     }
 
     void visit(Node &node) override
     {
-        std::cout << "node\n";
+        if (node.get_value())
+        {
+            node.get_value()->accept(*this);
+        }
     }
 };
 

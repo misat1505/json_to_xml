@@ -11,6 +11,7 @@ class ArrayValue : public AstValue
 {
 public:
     ArrayValue(std::vector<std::unique_ptr<Node>> value);
+    const std::vector<std::unique_ptr<Node>> &get_value() const;
     void accept(Visitor &visitor) override;
 
 private:

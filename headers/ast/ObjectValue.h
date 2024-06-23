@@ -10,6 +10,7 @@ class ObjectValue : public AstValue
 {
 public:
     ObjectValue(std::map<std::string, std::unique_ptr<Node>> value);
+    const std::map<std::string, std::unique_ptr<Node>> &get_value() const;
     void accept(Visitor &visitor) override;
 
 private:
