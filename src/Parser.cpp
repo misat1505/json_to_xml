@@ -8,7 +8,6 @@
 #include "../headers/ast/StringValue.h"
 #include "../headers/ast/ArrayValue.h"
 #include "../headers/ast/ObjectValue.h"
-#include <iostream>
 
 Parser::Parser(Lexer &lexer) : lexer(lexer)
 {
@@ -63,7 +62,6 @@ std::optional<Node> Parser::parse_true()
 
     auto node = Node(std::make_unique<TrueValue>(), token.get_position());
     this->must_be(TokenType::TRUE);
-    std::cout << "created true\n";
     return node;
 }
 
@@ -77,7 +75,6 @@ std::optional<Node> Parser::parse_false()
 
     auto node = Node(std::make_unique<FalseValue>(), token.get_position());
     this->must_be(TokenType::FALSE);
-    std::cout << "created false\n";
     return node;
 }
 
@@ -91,7 +88,6 @@ std::optional<Node> Parser::parse_null()
 
     auto node = Node(std::make_unique<NullValue>(), token.get_position());
     this->must_be(TokenType::NONE);
-    std::cout << "created null\n";
     return node;
 }
 
@@ -106,7 +102,6 @@ std::optional<Node> Parser::parse_number()
     auto value_str = std::get<std::string>(token.get_value());
     auto node = Node(std::make_unique<NumberValue>(value_str), token.get_position());
     this->lexer.generate_token();
-    std::cout << "created number\n";
     return node;
 }
 
@@ -121,7 +116,6 @@ std::optional<Node> Parser::parse_string()
     auto value_str = std::get<std::string>(token.get_value());
     auto node = Node(std::make_unique<StringValue>(value_str), token.get_position());
     this->must_be(TokenType::STRING);
-    std::cout << "created string\n";
     return node;
 }
 
@@ -136,7 +130,6 @@ std::optional<Node> Parser::parse_array()
     this->must_be(TokenType::BRACKET_CLOSE);
 
     auto node = Node(std::make_unique<ArrayValue>(std::move(nodes)), token.get_position());
-    std::cout << "created array\n";
     return node;
 }
 
@@ -176,7 +169,6 @@ std::optional<Node> Parser::parse_object()
     this->must_be(TokenType::BRACE_CLOSE);
 
     auto node = Node(std::make_unique<ObjectValue>(std::move(map)), token.get_position());
-    std::cout << "created object\n";
     return node;
 }
 

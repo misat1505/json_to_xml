@@ -22,6 +22,7 @@ set(SOURCES
     src/ast/ArrayValue.cpp
     src/ast/ObjectValue.cpp
     src/Converter.cpp
+    src/Printer.cpp
     src/main.cpp
 )
 

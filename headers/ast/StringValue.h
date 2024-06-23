@@ -9,6 +9,7 @@ class StringValue : public AstValue
 {
 public:
     StringValue(std::string value);
+    std::string get_value() const;
     void accept(Visitor &visitor) override;
 
 private:
